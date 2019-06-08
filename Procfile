@@ -1,1 +1,1 @@
-web: gunicorn app.wsgi --port $PORT
+web: gunicorn app.wsgi --bind localhost:$PORT
