@@ -1,0 +1,5 @@
+graft citytours/templates
+graft citytours/static
+prune citytours/static/.webassets-cache
+prune citytours/static/scss/bulma/docs
+prune citytours/static/scss/bulma/.git

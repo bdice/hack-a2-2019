@@ -1,0 +1,8 @@
+*.eggs/
+*.DS_Store
+*.pyc
+*.swp
+*__pycache__
+*citytours.egg-info/
+*build/
+*dist/
