@@ -1,1 +1,4 @@
-# hack-a2-2019
+# Ann Arbor City Tours
+
+Based on code from:
+- [signac-dashboard](https://github.com/glotzerlab/signac-dashboard)
