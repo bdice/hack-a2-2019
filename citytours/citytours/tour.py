@@ -15,6 +15,7 @@ class Tour:
             self.data.to_csv(data)
         else:
             self.data['latlng'] = self.data['latlng'].apply(lambda x : ast.literal_eval(x))
+        self.data = self.data.reset_index(drop=True)
 
     def __str__(self):
         return str(self.data)
