@@ -292,7 +292,7 @@ class CityTours:
         @CityTours.app.context_processor
         def injections():
             return {
-                'APP_NAME': self.config.get('name', 'City Tours'),
+                'APP_NAME': self.config.get('name', 'The Fairy Door'),
                 'APP_VERSION': __version__,
             }
 
