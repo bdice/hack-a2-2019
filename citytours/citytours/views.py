@@ -6,20 +6,20 @@ import re
 def home(citytour):
     return redirect(url_for('tours_list'))
 
-def tours_list(citytour):
-    abort(404, 'The tour id requested could not be found.')
-    return
 
-def show_tour(citytour, tourid):
+def tours_list(citytour):
+    g.tours = citytour.tours
+    return render_template('tours_list.html')
+
+
+def show_tour(citytour, tourname):
     try:
-        tour = citytour.project.open_tour(id=tourid)
+        tour = parse_tour(citytour.tours[tourname])
     except KeyError:
-        abort(404, 'The tour id requested could not be found.')
+        abort(404, 'The tour requested could not be found.')
     else:
-        g.tours = citytour._get_tour_details([tour])
-        g.title = g.tours[0]['title']
-        g.subtitle = g.tours[0]['subtitle']
-        return citytour._render_tour_view(default_view='grid')
+        g.tour = tour
+        return render_template('tour.html')
 
 
 def get_file(citytour, tourid, filename):

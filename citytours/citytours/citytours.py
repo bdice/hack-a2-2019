@@ -47,8 +47,9 @@ class CityTours:
     :param config: Configuration dictionary (default: :code:`{}`).
     :type config: dict
     """
-    def __init__(self, config={}):
+    def __init__(self, config={}, tours={}):
         self.config = config
+        self.tours = tours
         self._prepare()
 
     def _create_app(self, config={}):
@@ -314,7 +315,7 @@ class CityTours:
 
         self.add_url('views.home', ['/'])
         self.add_url('views.tours_list', ['/tours/'])
-        self.add_url('views.show_tour', ['/tours/<tourid>'])
+        self.add_url('views.show_tour', ['/tours/<tourname>'])
 
     def update_cache(self):
         """Clear CityTour server caches.

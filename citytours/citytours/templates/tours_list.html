@@ -10,7 +10,7 @@
             <ul>
                 {% for tour in g.tours %}
                 <li>
-                    <a href="{{ url_for('show_tour', tour._id) }}">{{ tour.title }} &mdash; {{ tour.subtitle }}</a>
+                    <a href="{{ url_for('show_tour', tourname=tour.name) }}">{{ tour.title }} &mdash; {{ tour.subtitle }}</a>
                 </li>
                 {% endfor %}
             </ul>
