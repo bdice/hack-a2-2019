@@ -5,15 +5,37 @@
 {% block panels %}
 <div class="column">
     <section class="panel">
-        <div class="panel-block">
+        <div class="has-text-centered">
             <ul>
-                {% for index, row in g.tour.data.iterrows() %}
                 <li>
-                    {{ row['Name'] }}
+                    <a class="button is-primary">Plan my route</a>
                 </li>
-                {% endfor %}
             </ul>
         </div>
+    </section>
+    <table class="table">
+        {% set fields = ['Name', 'Address', 'Description'] %}
+        <thead>
+            <tr>
+                {% for field in fields %}
+                <td>
+                    {{ field }}
+                </td>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        {% for index, row in g.tour.data.iterrows() %}
+        <tbody>
+            <tr>
+                {% for field in fields %}
+                <td>
+                    {{ row[field] }}
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+        {% endfor %}
     </section>
 </div>
 {% endblock %}

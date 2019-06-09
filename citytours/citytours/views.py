@@ -1,5 +1,6 @@
 from flask import (session, redirect, request, url_for, send_file, flash,
                    abort, render_template, g, jsonify)
+import json
 import re
 from .tour import Tour
 
@@ -28,7 +29,7 @@ def show_tour(citytour, tourname):
 def get_tour_data(citytour, tourname):
     try:
         tour = citytour.tours[tourname]
-        return jsonify(tour.data.to_json())
+        return jsonify(json.loads(tour.data.to_json(orient='records')))
     except KeyError:
         abort(404, 'The tour requested could not be found.')
 
@@ -37,10 +38,7 @@ def get_route_data(citytour, tourname):
         if request.method == "POST":
             return request.form["user_location"]
         else:
-            steps = citytour.tours[tourname].generate_route(42.278321, -83.746057)
-            return '\n'.join([s[i] for s in steps for i in range(len(s))])
-            print(steps)
-            return "d23frewfwef"
+            citytour.tours[tourname].get_route(42.278321, -83.746057)
     except KeyError:
         abort(404, 'The tour requested could not be found.')
 
