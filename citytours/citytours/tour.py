@@ -2,6 +2,7 @@ import ast
 import pandas as pd
 from . import fetch_url
 from .traveling_salesman import solve_tsp, get_directions, parse_latlngs
+from .fetch_url import fetch_url
 
 class Tour:
     def __init__(self, name, data, title, subtitle=None):
@@ -16,6 +17,7 @@ class Tour:
         else:
             self.data['latlng'] = self.data['latlng'].apply(lambda x : ast.literal_eval(x))
         self.data = self.data.sample(n=8)
+        self.data['Directions'] = self.data['latlng'].apply(fetch_url)
         self.data = self.data.reset_index(drop=True)
 
     def __str__(self):

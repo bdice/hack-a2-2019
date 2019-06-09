@@ -5,7 +5,7 @@
 {% block panels %}
 <div class="column">
     <table class="table is-striped is-hoverable">
-        {% set fields = ['Name', 'Description'] %}
+        {% set fields = ['Name', 'Description', 'Directions'] %}
         <thead>
             <tr>
                 {% for field in fields %}
@@ -21,7 +21,11 @@
             <tr>
                 {% for field in fields %}
                 <td>
+                    {%- if field == 'Directions' -%}
+                    <a href="{{ row[field] }}">Directions</a>
+                    {%- else -%}
                     {{ row[field] }}
+                    {%- endif -%}
                 </td>
                 {% endfor %}
             </tr>
