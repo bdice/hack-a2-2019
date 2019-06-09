@@ -28,7 +28,7 @@ def show_tour(citytour, tourname):
 def get_tour_data(citytour, tourname):
     try:
         tour = citytour.tours[tourname]
-        return jsonify(tour.data.to_json())
+        return jsonify(tour.data.to_dict())
     except KeyError:
         abort(404, 'The tour requested could not be found.')
 
