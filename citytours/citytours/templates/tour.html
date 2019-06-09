@@ -3,4 +3,20 @@
 {% block title %}{{ g.title }}{% endblock %}
 {% block subtitle %}{%- if g.subtitle -%}{{ g.subtitle }}{%- endif -%}{% endblock %}
 {% block panels %}
+<div class="column">
+    <section class="panel">
+        <div class="panel-block">
+            <ul>
+                {% for index, row in g.tour.data.iterrows() %}
+                <li>
+                    {{ row['Name'] }}
+                </li>
+                {% endfor %}
+                <!--<li>-->
+                    <!--<a class="button go_overview" href="{{ }}">Go</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </section>
+</div>
 {% endblock %}
