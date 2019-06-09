@@ -20,6 +20,7 @@ def show_tour(citytour, tourname):
         g.tour = citytour.tours[tourname]
         g.title = g.tour.title
         g.subtitle = g.tour.subtitle
+        g.active_page = tourname
         return render_template('tour.html')
     except KeyError:
         abort(404, 'The tour requested could not be found.')
