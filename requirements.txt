@@ -9,4 +9,3 @@ numpy
 ortools
 googlemaps
 beautifulsoup4
--e traveling_salesman
