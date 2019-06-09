@@ -4,6 +4,10 @@ CityTours.prototype.getTour = function(map, tourname) {
   $.getJSON('/api/data/'+tourname, function(data) {
     console.log('TOUR RESPONSE:');
     console.log(data);
+    data.forEach(row => {
+      latlng = {'lat': row.lat, 'lon': row.lon};
+      L.marker(latlng).addTo(map).bindPopup(row.Name);
+    });
   });
 };
 
