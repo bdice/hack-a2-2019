@@ -1,3 +1,12 @@
+function CityTours(){};
+
+CityTours.prototype.getRoute = function(map, tourname, lat, lon) {
+  $.getJSON('/api/data/'+tourname, {'lat': lat, 'lon': lon}, function(data) {
+    console.log('RESPONSE:');
+    console.log(data);
+  });
+};
+
 $(document).on('turbolinks:load', function() {
   // Centered on Ann Arbor downtown by default
   let user_latlon = [42.2808, -83.7430];
@@ -8,7 +17,8 @@ $(document).on('turbolinks:load', function() {
     maxZoom: 19
   });
 
-  var map = L.map('mapid').setView(user_latlon, 15);
+  let map = L.map('mapid').setView(user_latlon, 15);
+  let citytour = new CityTours();
   CartoDB_Voyager.addTo(map);
 
   function onLocationFound(e) {
@@ -19,6 +29,7 @@ $(document).on('turbolinks:load', function() {
 
     L.circle(e.latlng, radius).addTo(map);
 
+    citytour.getRoute(map, 'birthday', e.latlng.lat, e.latlng.lng);
   }
 
   map.on('locationfound', onLocationFound);
