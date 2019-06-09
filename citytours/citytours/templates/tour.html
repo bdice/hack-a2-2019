@@ -13,16 +13,29 @@
             </ul>
         </div>
     </section>
-    <section class="panel">
-        <div class="panel-block">
-            <ul>
-                {% for index, row in g.tour.data.iterrows() %}
-                <li>
-                    {{ row['Name'] }}
-                </li>
+    <table class="table">
+        {% set fields = ['Name', 'Address', 'Description'] %}
+        <thead>
+            <tr>
+                {% for field in fields %}
+                <td>
+                    {{ field }}
+                </td>
                 {% endfor %}
-            </ul>
-        </div>
+            </tr>
+        </thead>
+
+        {% for index, row in g.tour.data.iterrows() %}
+        <tbody>
+            <tr>
+                {% for field in fields %}
+                <td>
+                    {{ row[field] }}
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+        {% endfor %}
     </section>
 </div>
 {% endblock %}
