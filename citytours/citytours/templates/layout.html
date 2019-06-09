@@ -127,6 +127,7 @@
                 {% if g.pagination is defined %}
                 {{ paginator.render_pagination(g.pagination) | safe }}
                 {% endif %}
+                <div id="mapid"></div>
                 {% if self.panels() %}
                 {% block panels %}{% endblock %}
                 {% endif %}

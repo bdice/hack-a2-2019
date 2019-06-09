@@ -9,6 +9,8 @@ def home(citytour):
 
 
 def tours_list(citytour):
+    g.title = "Tours"
+    g.subtitle = "get out | explore | adventure"
     g.tours = list(citytour.tours.values())
     return render_template('tours_list.html')
 
@@ -16,6 +18,8 @@ def tours_list(citytour):
 def show_tour(citytour, tourname):
     try:
         g.tour = citytour.tours[tourname]
+        g.title = g.tour.title
+        g.subtitle = g.tour.subtitle
         return render_template('tour.html')
     except KeyError:
         abort(404, 'The tour requested could not be found.')

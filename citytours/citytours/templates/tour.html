@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block title %}{{ g.title }}{% endblock %}
-{% block subtitle %}{{ g.subtitle }}{% endblock %}
+{% block subtitle %}{%- if g.subtitle -%}{{ g.subtitle }}{%- endif -%}{% endblock %}
 {% block panels %}
-<div id="mapid"></div>
 {% endblock %}
