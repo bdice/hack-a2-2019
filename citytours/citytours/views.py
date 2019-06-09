@@ -1,6 +1,7 @@
 from flask import (session, redirect, request, url_for, send_file, flash,
                    abort, render_template, g)
 import re
+from .tour import Tour
 
 
 def home(citytour):
@@ -8,7 +9,7 @@ def home(citytour):
 
 
 def tours_list(citytour):
-    g.tours = citytour.tours
+    g.tours = [Tour(**tour) for tour in citytour.tours]
     return render_template('tours_list.html')
 
 

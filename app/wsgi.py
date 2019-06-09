@@ -9,8 +9,9 @@ config = {
 }
 
 tours = [{
-    'name': 'Birthday Deals',
-    'data': 'tours/birthday_deals.csv'
+    'name': 'birthday',
+    'title': 'Birthday Deals',
+    'data': 'tours/birthday_deals.csv',
 }]
 
 app = CityTours(config=config, tours=tours)
