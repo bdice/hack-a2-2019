@@ -49,7 +49,7 @@ def _create_data_model(locations, start_index=0):
     return data
 
 
-def solve_tsp(locations):
+def solve_tsp(locations, start_index=0):
     """Solve the traveling salesman problem for a set of locations that can be
     found with the Google Maps API.
 
@@ -60,7 +60,7 @@ def solve_tsp(locations):
     Returns:
         list: The locations in the desired order.
     """
-    data = _create_data_model(locations)
+    data = _create_data_model(locations,start_index)
 
     def distance_callback(from_index, to_index):
         """Returns the distance between the two nodes by directly accessing the

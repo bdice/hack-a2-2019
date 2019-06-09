@@ -37,7 +37,10 @@ def get_route_data(citytour, tourname):
         if request.method == "POST":
             return request.form["user_location"]
         else:
-            self.tours[tourname].get_route(42.278321, -83.746057)
+            steps = citytour.tours[tourname].generate_route(42.278321, -83.746057)
+            return '\n'.join([s[i] for s in steps for i in range(len(s))])
+            print(steps)
+            return "d23frewfwef"
     except KeyError:
         abort(404, 'The tour requested could not be found.')
 
