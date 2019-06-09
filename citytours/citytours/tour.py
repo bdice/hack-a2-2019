@@ -16,7 +16,7 @@ class Tour:
             self.data.to_csv(data)
         else:
             self.data['latlng'] = self.data['latlng'].apply(lambda x : ast.literal_eval(x))
-        self.data = self.data.sample(n=8)
+        self.data = self.data.sample(n=8, random_state=0)
         self.data['Directions'] = self.data['latlng'].apply(fetch_url)
         self.data = self.data.reset_index(drop=True)
 
