@@ -87,6 +87,23 @@ def solve_tsp(locations):
     # Solve the problem.
     assignment = routing.SolveWithParameters(search_parameters)
 
+    def print_solution(manager, routing, assignment):
+        """Prints assignment on console."""
+        print('Objective: {} miles'.format(assignment.ObjectiveValue()))
+        index = routing.Start(0)
+        plan_output = 'Route for vehicle 0:\n'
+        route_distance = 0
+        while not routing.IsEnd(index):
+            plan_output += ' {} ->'.format(manager.IndexToNode(index))
+            previous_index = index
+            index = assignment.Value(routing.NextVar(index))
+            route_distance += routing.GetArcCostForVehicle(previous_index, index, 0)
+        plan_output += ' {}\n'.format(manager.IndexToNode(index))
+        print(plan_output)
+        plan_output += 'Route distance: {}miles\n'.format(route_distance)
+
+    if assignment:
+        print_solution(manager, routing, assignment)
     if assignment:
         index = routing.Start(0)
         solution = []
@@ -95,14 +112,10 @@ def solve_tsp(locations):
             previous_index = index
             index = assignment.Value(routing.NextVar(index))
 
-            # Don't add the dummy index that has no distance to anything.
-            if next_loc == len(locations):
+            # Don't add either dummy index. The indices that has no distance to anything.
+            if next_loc >= len(locations):
                 continue
             solution.append(next_loc)
-
-        # Now remove the dummy indexensuring that we start at the desired
-        # starting point, which is always the second entry
-        solution.pop(1)
     else:
         raise SolverError("Unable to converge solution to traveling salesman.")
 
