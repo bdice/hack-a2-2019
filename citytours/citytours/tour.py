@@ -8,6 +8,7 @@ class Tour:
         self.title = title
         self.subtitle = subtitle
         self.data = pd.read_csv(data)
+        self.data = self.data.dropna(subset=['Address'])
 
     def __str__(self):
         return str(self.data)
