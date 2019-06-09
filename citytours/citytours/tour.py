@@ -25,19 +25,9 @@ class Tour:
 
     def generate_route(self, lat, lon):
         """Generate route from latitude and longitude."""
-        data = self.data.loc[~self.data['Address'].isna()]
+        data = self.data.head(8)  # Hard code number to use
         locations = data['Address'].tolist()
-        locations.append([str(lat), str(lon)])
-        max_index = len(locations)-1
-        location_order = solve_tsp(locations, max_index)
-        # Assuming just a numerical index.
+        locations = [[str(lat), str(lon)]] + locations
+        location_order = solve_tsp(locations)
         indices = data.index.tolist()
-        data = data.reindex([indices[i] for i in location_order if i != max_index])
-        sorted_locations = data['Address']
-        legs = []
-        for i in range(len(data)-1):
-            steps = get_directions(sorted_locations.iloc[i], sorted_locations.iloc[i+1])
-            legs.append(steps)
-
-        self.legs = legs
-        return legs
+        return [indices[i-1] for i in location_order if i != 0]

@@ -1,12 +1,9 @@
 from traveling_salesman import solve_tsp
+import pandas as pd
 
 if __name__ == "__main__":
-    locations = ["510 N 4th Ave, Ann Arbor",
-                 "1050 Wall Street, Ann Arbor",
-                 "1647 Beal Ave, Ann Arbor"]
-    print(solve_tsp(locations))
-
-    locations = ['Rappourt, Ann Arbor',
-                 "Arbor Brewing Company, Ann Arbor",
-                 "HopCat, Ann Arbor"]
+    data = pd.read_csv('../../tour_data/birthday_deals.csv')
+    data = data.loc[~data['Address'].isna()]
+    data = data.head(6)
+    locations = data['Address'].tolist()
     print(solve_tsp(locations))

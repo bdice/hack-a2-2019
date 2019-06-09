@@ -17,6 +17,8 @@ def _create_data_model(locations, start_index=0):
 
     # Generate distance matrix from locations
     nl = len(locations)
+    # For the sake of saving API calls, assume we're always using the same
+    # data.
     dm = get_distance_matrix(locations, locations)
 
     # The default TSP will always close the loop. What we want is to avoid
