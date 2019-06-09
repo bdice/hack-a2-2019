@@ -1,39 +1,23 @@
 function CityTours(){};
 
-CityTours.prototype.getTour = function(map, tourname) {
+CityTours.prototype.getRoute = function(map, tourname, lat, lon) {
+  let points = [];
+
   $.getJSON('/api/data/'+tourname, function(data) {
     console.log('TOUR RESPONSE:');
     console.log(data);
 
-    let points = [];
     data.forEach(row => {
       latlng = {'lat': row.latlng[0], 'lon': row.latlng[1]};
       L.marker(latlng).addTo(map).bindPopup(row.Name);
       points.push(row.latlng);
     });
-    let indices = [0, 1, 2, 3, 4, 5];
-    let lineverts = [];
-    indices.forEach(ind => {
-      lineverts.push(points[ind]);
-    });
-    console.log(lineverts);
-    L.polyline(lineverts).addTo(map);
   });
-};
 
-CityTours.prototype.getRoute = function(map, tourname, lat, lon) {
-  $.getJSON('/api/route/'+tourname, {'user_location': [lat, lon]}, function(data) {
+  $.getJSON('/api/route/'+tourname, {'user_location': [lat, lon]}, function(indices) {
     console.log('ROUTE RESPONSE:');
-    console.log(data);
-
-    let points = [];
-    data.forEach(row => {
-      latlng = {'lat': row.latlng[0], 'lon': row.latlng[1]};
-      L.marker(latlng).addTo(map).bindPopup(row.Name);
-      points.push(row.latlng);
-    });
-    let indices = [0, 1, 2, 3, 4, 5];
-    let lineverts = [];
+    console.log(indices);
+    let lineverts = [[lat, lon]];
     indices.forEach(ind => {
       lineverts.push(points[ind]);
     });
@@ -68,7 +52,6 @@ $(document).on('turbolinks:load', function() {
     L.circle(e.latlng, radius).addTo(map);
 
     console.log('Found location, requesting tour');
-    citytour.getTour(map, 'birthday');
     citytour.getRoute(map, 'birthday', e.latlng.lat, e.latlng.lng);
   }
 
