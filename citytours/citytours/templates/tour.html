@@ -13,8 +13,8 @@
             </ul>
         </div>
     </section>
-    <table class="table">
-        {% set fields = ['Name', 'Address', 'Description'] %}
+    <table class="table is-striped is-hoverable">
+        {% set fields = ['Name', 'Description'] %}
         <thead>
             <tr>
                 {% for field in fields %}
@@ -25,8 +25,8 @@
             </tr>
         </thead>
 
-        {% for index, row in g.tour.data.iterrows() %}
         <tbody>
+        {% for index, row in g.tour.data.iterrows() %}
             <tr>
                 {% for field in fields %}
                 <td>
@@ -34,8 +34,8 @@
                 </td>
                 {% endfor %}
             </tr>
-        </tbody>
         {% endfor %}
-    </section>
+        </tbody>
+    </table>
 </div>
 {% endblock %}
