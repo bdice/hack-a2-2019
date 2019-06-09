@@ -317,6 +317,7 @@ class CityTours:
         self.add_url('views.home', ['/'])
         self.add_url('views.tours_list', ['/tours/'])
         self.add_url('views.show_tour', ['/tours/<tourname>'])
+        self.add_url('views.get_tour_data', ['/api/data/<tourname>'])
 
     def update_cache(self):
         """Clear CityTour server caches.

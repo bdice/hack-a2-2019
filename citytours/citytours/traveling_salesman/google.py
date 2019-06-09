@@ -1,6 +1,6 @@
 import googlemaps
 from datetime import datetime
-import bs4
+# import bs4
 import os
 
 
@@ -28,14 +28,15 @@ def get_directions(origin, destination, mode="driving", waypoints=None):
                               waypoints=waypoints,
                               departure_time=now)
 
+    # Assumes no waypoints.
     legs = result[0]['legs'][0]
     steps = legs['steps']
-    directions = []
-    for step in steps:
-        soup = bs4.BeautifulSoup(step['html_instructions'], features='html.parser')
-        directions.append(soup.get_text())
+    # directions = []
+    # for step in steps:
+        # soup = bs4.BeautifulSoup(step['html_instructions'], features='html.parser')
+        # directions.append(soup.get_text())
 
-    return directions
+    return steps
 
 
 def get_distance_matrix(origins, destinations):
