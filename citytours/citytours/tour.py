@@ -1,3 +1,4 @@
+import ast
 import pandas as pd
 from . import fetch_url
 from .traveling_salesman import solve_tsp, get_directions, parse_latlngs
@@ -13,7 +14,7 @@ class Tour:
             self.data['latlng'] = parse_latlngs(self.data.Address)
             self.data.to_csv(data)
         else:
-            self.data['latlng'].apply(lambda x : pd.Series(x.split(',')))
+            self.data['latlng'] = self.data['latlng'].apply(lambda x : ast.literal_eval(x))
 
     def __str__(self):
         return str(self.data)
