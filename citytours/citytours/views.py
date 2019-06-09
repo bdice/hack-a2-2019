@@ -1,5 +1,5 @@
 from flask import (session, redirect, request, url_for, send_file, flash,
-                   abort, render_template, g)
+                   abort, render_template, g, jsonify)
 import re
 from .tour import Tour
 
@@ -24,6 +24,14 @@ def show_tour(citytour, tourname):
         return render_template('tour.html')
     except KeyError:
         abort(404, 'The tour requested could not be found.')
+
+def get_tour_data(citytour, tourname):
+    try:
+        tour = citytour.tours[tourname]
+        return jsonify(tour.data.to_json())
+    except KeyError:
+        abort(404, 'The tour requested could not be found.')
+
 
 
 def get_file(citytour, tourid, filename):
