@@ -5,3 +5,8 @@ if __name__ == "__main__":
                  "1050 Wall Street, Ann Arbor",
                  "1647 Beal Ave, Ann Arbor"]
     print(solve_tsp(locations))
+
+    locations = ['Rappourt, Ann Arbor',
+                 "Arbor Brewing Company, Ann Arbor",
+                 "HopCat, Ann Arbor"]
+    print(solve_tsp(locations))
