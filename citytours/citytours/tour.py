@@ -15,6 +15,7 @@ class Tour:
             self.data.to_csv(data)
         else:
             self.data['latlng'] = self.data['latlng'].apply(lambda x : ast.literal_eval(x))
+        self.data = self.data.sample(n=8)
         self.data = self.data.reset_index(drop=True)
 
     def __str__(self):
@@ -26,7 +27,7 @@ class Tour:
 
     def generate_route(self, lat, lon):
         """Generate route from latitude and longitude."""
-        data = self.data.head(8)  # Hard code number to use
+        data = self.data
         locations = data['Address'].tolist()
         locations = [[str(lat), str(lon)]] + locations
         location_order = solve_tsp(locations)
