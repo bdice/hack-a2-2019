@@ -38,6 +38,8 @@ $(document).on('turbolinks:load', function() {
 
     L.circle(e.latlng, radius).addTo(map);
 
+    console.log('Found location, requesting tour');
+    citytour.getTour(map, 'birthday');
     citytour.getRoute(map, 'birthday', e.latlng.lat, e.latlng.lng);
   }
 
