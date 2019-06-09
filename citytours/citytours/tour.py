@@ -1,4 +1,5 @@
 import pandas as pd
+from fetch_url import fetch_url
 
 class Tour:
     def __init__(self, name, data, title, subtitle=None):
@@ -13,3 +14,7 @@ class Tour:
     @property
     def fields(self):
         return list(self.data.columns)
+
+    def route(self, coord):
+        maps_url = fetch_url(coord)
+        return maps_url
