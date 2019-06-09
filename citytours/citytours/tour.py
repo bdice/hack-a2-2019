@@ -1,6 +1,6 @@
 import pandas as pd
 from . import fetch_url
-from .traveling_salesman import solve_tsp, get_directions
+from .traveling_salesman import solve_tsp, get_directions, parse_latlngs
 
 class Tour:
     def __init__(self, name, data, title, subtitle=None):
@@ -9,6 +9,7 @@ class Tour:
         self.subtitle = subtitle
         self.data = pd.read_csv(data)
         self.data = self.data.dropna(subset=['Address'])
+        self.data['latlng'] = parse_latlngs(self.data.Address)
 
     def __str__(self):
         return str(self.data)

@@ -5,7 +5,7 @@ CityTours.prototype.getTour = function(map, tourname) {
     console.log('TOUR RESPONSE:');
     console.log(data);
     data.forEach(row => {
-      latlng = {'lat': row.lat, 'lon': row.lon};
+      latlng = {'lat': row.latlng[0], 'lon': row.latlng[1]};
       L.marker(latlng).addTo(map).bindPopup(row.Name);
     });
   });
