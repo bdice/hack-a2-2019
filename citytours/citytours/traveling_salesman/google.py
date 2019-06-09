@@ -1,9 +1,10 @@
 import googlemaps
 from datetime import datetime
 import bs4
+import os
 
 
-API_KEY = 'YOUR_API_KEY'
+API_KEY = os.environ.get('GMAPS_API_KEY', 'YOUR_API_KEY')
 
 
 def get_directions(origin, destination, mode="driving", waypoints=None):
