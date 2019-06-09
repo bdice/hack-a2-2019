@@ -5,6 +5,15 @@
 {% block panels %}
 <div class="column">
     <section class="panel">
+        <div class="has-text-centered">
+            <ul>
+                <li>
+                    <a class="button is-primary">Plan my route</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="panel">
         <div class="panel-block">
             <ul>
                 {% for index, row in g.tour.data.iterrows() %}
