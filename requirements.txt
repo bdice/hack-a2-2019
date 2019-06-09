@@ -1,4 +1,12 @@
+# Webapp requirements
 gunicorn
 flask
 pandas
 -e ./citytours
+
+# Traveling Salesman requirements
+numpy
+ortools
+googlemaps
+beautifulsoup4
+-e traveling_salesman
