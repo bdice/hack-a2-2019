@@ -35,13 +35,14 @@ def get_tour_data(citytour, tourname):
 
 def get_route_data(citytour, tourname):
     try:
-        if request.method == "POST":
-            return request.form["user_location"]
-        else:
-            citytour.tours[tourname].generate_route(42.278321, -83.746057)
+        try:
+            latlon =  request.form["user_location"]
+        except:
+            latlon = [42.278321, -83.746057]
+        trip_order = citytour.tours[tourname].generate_route(*latlon)
+        return jsonify(trip_order)
     except KeyError:
         abort(404, 'The tour requested could not be found.')
-
 
 
 def get_file(citytour, tourid, filename):
