@@ -87,23 +87,23 @@ def solve_tsp(locations):
     # Solve the problem.
     assignment = routing.SolveWithParameters(search_parameters)
 
-    def print_solution(manager, routing, assignment):
-        """Prints assignment on console."""
-        print('Objective: {} miles'.format(assignment.ObjectiveValue()))
-        index = routing.Start(0)
-        plan_output = 'Route for vehicle 0:\n'
-        route_distance = 0
-        while not routing.IsEnd(index):
-            plan_output += ' {} ->'.format(manager.IndexToNode(index))
-            previous_index = index
-            index = assignment.Value(routing.NextVar(index))
-            route_distance += routing.GetArcCostForVehicle(previous_index, index, 0)
-        plan_output += ' {}\n'.format(manager.IndexToNode(index))
-        print(plan_output)
-        plan_output += 'Route distance: {}miles\n'.format(route_distance)
+    # def print_solution(manager, routing, assignment):
+        # """Prints assignment on console."""
+        # print('Objective: {} miles'.format(assignment.ObjectiveValue()))
+        # index = routing.Start(0)
+        # plan_output = 'Route for vehicle 0:\n'
+        # route_distance = 0
+        # while not routing.IsEnd(index):
+            # plan_output += ' {} ->'.format(manager.IndexToNode(index))
+            # previous_index = index
+            # index = assignment.Value(routing.NextVar(index))
+            # route_distance += routing.GetArcCostForVehicle(previous_index, index, 0)
+        # plan_output += ' {}\n'.format(manager.IndexToNode(index))
+        # print(plan_output)
+        # plan_output += 'Route distance: {}miles\n'.format(route_distance)
 
-    if assignment:
-        print_solution(manager, routing, assignment)
+    # if assignment:
+        # print_solution(manager, routing, assignment)
     if assignment:
         index = routing.Start(0)
         solution = []
@@ -119,4 +119,4 @@ def solve_tsp(locations):
     else:
         raise SolverError("Unable to converge solution to traveling salesman.")
 
-    return [locations[i] for i in solution]
+    return solution
