@@ -32,6 +32,15 @@ def get_tour_data(citytour, tourname):
     except KeyError:
         abort(404, 'The tour requested could not be found.')
 
+def get_route_data(citytour, tourname):
+    try:
+        if request.method == "POST":
+            return request.form["user_location"]
+        else:
+            self.tours[tourname].get_route(42.278321, -83.746057)
+    except KeyError:
+        abort(404, 'The tour requested could not be found.')
+
 
 
 def get_file(citytour, tourid, filename):
