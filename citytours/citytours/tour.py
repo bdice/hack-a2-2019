@@ -9,7 +9,9 @@ class Tour:
         self.subtitle = subtitle
         self.data = pd.read_csv(data)
         self.data = self.data.dropna(subset=['Address'])
-        self.data['latlng'] = parse_latlngs(self.data.Address)
+        if 'latlng' not in self.data:
+            self.data['latlng'] = parse_latlngs(self.data.Address)
+        self.data.to_csv(data)
 
     def __str__(self):
         return str(self.data)
