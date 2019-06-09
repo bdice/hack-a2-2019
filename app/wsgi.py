@@ -5,7 +5,7 @@ WSGI config
 from citytours import CityTours, Tour
 
 config = {
-    'name': 'Ann Arbor City Tours',
+    'name': 'The Fairy Door',
 }
 
 tours_data = [{
