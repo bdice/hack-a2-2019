@@ -6,6 +6,9 @@ import re
 def home(citytour):
     return redirect(url_for('tours_list'))
 
+def tours_list(citytour):
+    abort(404, 'The tour id requested could not be found.')
+    return
 
 def show_tour(citytour, tourid):
     try:

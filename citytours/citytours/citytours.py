@@ -208,18 +208,6 @@ class CityTours:
                     pagination.page), 'danger')
         return pagination
 
-    def _render_tour_view(self, *args, **kwargs):
-        g.active_page = 'tours'
-        view_mode = request.args.get('view', kwargs.get(
-            'default_view', 'list'))
-        if view_mode == 'grid':
-            return render_template('tours_grid.html', *args, **kwargs)
-        elif view_mode == 'list':
-            return render_template('tours_list.html', *args, **kwargs)
-        else:
-            return self._render_error(
-                ValueError('Invalid view mode: {}'.format(view_mode)))
-
     def _render_error(self, error):
         if isinstance(error, Exception):
             error_string = "{}: {}".format(type(error).__name__, error)
@@ -289,55 +277,44 @@ class CityTours:
         """Registers routes with the Flask application.
 
         This method configures context processors, templates, and sets up
-        routes for a basic Dashboard instance. Additionally, routes declared by
-        modules are registered by this method.
+        routes for a basic CityTours instance.
         """
-        CityTour = self
+        CityTours = self
 
-        @CityTour.app.after_request
+        @CityTours.app.after_request
         def prevent_caching(response):
             if 'Cache-Control' not in response.headers:
                 response.headers['Cache-Control'] = 'no-store'
             return response
 
-        @CityTour.app.context_processor
+        @CityTours.app.context_processor
         def injections():
-            session.setdefault('enabled_modules',
-                               [i for i in range(len(self.modules))
-                                if self.modules[i].enabled])
             return {
                 'APP_NAME': self.config.get('name', 'City Tours'),
                 'APP_VERSION': __version__,
-                'modules': self.modules,
-                'enabled_modules': session['enabled_modules'],
-                'module_assets': self._module_assets
             }
 
         # Add pagination support from http://flask.pocoo.org/snippets/44/
-        @CityTour.app.template_global()
+        @CityTours.app.template_global()
         def url_for_other_page(page):
             args = request.args.copy()
             args['page'] = page
             return url_for(request.endpoint, **args)
 
-        @CityTour.app.template_global()
+        @CityTours.app.template_global()
         def modify_query(**new_values):
             args = request.args.copy()
             for key, value in new_values.items():
                 args[key] = value
             return '{}?{}'.format(request.path, url_encode(args))
 
-        @CityTour.app.errorhandler(404)
+        @CityTours.app.errorhandler(404)
         def page_not_found(error):
             return self._render_error(str(error))
 
         self.add_url('views.home', ['/'])
-        self.add_url('views.settings', ['/settings'])
-        self.add_url('views.search', ['/search'])
         self.add_url('views.tours_list', ['/tours/'])
         self.add_url('views.show_tour', ['/tours/<tourid>'])
-        self.add_url('views.get_file', ['/tours/<tourid>/file/<path:filename>'])
-        self.add_url('views.change_modules', ['/modules'], methods=['POST'])
 
     def update_cache(self):
         """Clear CityTour server caches.

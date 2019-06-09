@@ -3,14 +3,14 @@
 {% block title %}{{ g.title }}{% endblock %}
 {% block subtitle %}{{ g.subtitle }}{% endblock %}
 {% block panels %}
-{% if g.jobs | length > 0 %}
+{% if g.tours | length > 0 %}
 <div class="column">
     <section class="panel">
         <div class="panel-block">
             <ul>
-                {% for job_details in g.jobs %}
+                {% for tour in g.tours %}
                 <li>
-                    <a href="{{ url_for('show_job', jobid=job_details.job._id) }}">{{ job_details.title }} &mdash; {{ job_details.subtitle }}</a>
+                    <a href="{{ url_for('show_tour', tour._id) }}">{{ tour.title }} &mdash; {{ tour.subtitle }}</a>
                 </li>
                 {% endfor %}
             </ul>
