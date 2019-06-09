@@ -4,15 +4,6 @@
 {% block subtitle %}{%- if g.subtitle -%}{{ g.subtitle }}{%- endif -%}{% endblock %}
 {% block panels %}
 <div class="column">
-    <section class="panel">
-        <div class="has-text-centered">
-            <ul>
-                <li>
-                    <a class="button is-primary">Plan my route</a>
-                </li>
-            </ul>
-        </div>
-    </section>
     <table class="table is-striped is-hoverable">
         {% set fields = ['Name', 'Description'] %}
         <thead>
