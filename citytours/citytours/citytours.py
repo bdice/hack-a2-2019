@@ -18,6 +18,7 @@ import natsort
 from .version import __version__
 from .pagination import Pagination
 from .util import LazyView
+from .tour import Tour
 
 logger = logging.getLogger(__name__)
 

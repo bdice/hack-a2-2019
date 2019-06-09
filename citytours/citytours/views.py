@@ -9,18 +9,16 @@ def home(citytour):
 
 
 def tours_list(citytour):
-    g.tours = [Tour(**tour) for tour in citytour.tours]
+    g.tours = list(citytour.tours.values())
     return render_template('tours_list.html')
 
 
 def show_tour(citytour, tourname):
     try:
-        tour = parse_tour(citytour.tours[tourname])
+        g.tour = citytour.tours[tourname]
+        return render_template('tour.html')
     except KeyError:
         abort(404, 'The tour requested could not be found.')
-    else:
-        g.tour = tour
-        return render_template('tour.html')
 
 
 def get_file(citytour, tourid, filename):
