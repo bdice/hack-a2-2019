@@ -1,6 +1,6 @@
 {
-  "name": "Ann Arbor City Tours",
-  "description": "Ann Arbor City Tours",
+  "name": "The Fairy Door",
+  "description": "Making your city magical!",
   "image": "heroku/python",
   "repository": "https://github.com/bdice/hack-a2-2019",
   "keywords": ["python", "flask" ],
