@@ -1,6 +1,8 @@
 class Tour:
-    def __init__(self, name, data):
+    def __init__(self, name, data, title, subtitle=None):
         self.name = name
+        self.title = title
+        self.subtitle = subtitle
         self.data = data
 
     def __str__(self):
@@ -9,11 +11,3 @@ class Tour:
     @property
     def fields(self):
         return list(self.data.columns)
-
-    @property
-    def title(self):
-        return self.title
-
-    @property
-    def subtitle(self):
-        return self.subtitle
